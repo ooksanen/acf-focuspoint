@@ -35,7 +35,7 @@ Usage is very similar to [ACF Image Field](http://www.advancedcustomfields.com/r
 
 ![Screenshot 2](screenshots/screenshot2.png)
 
-Plugin returns an array with image id and top/left values (percentages):
+Plugin returns an array with image id and top/left values (percentages) of selected focus point:
 
 ```
 'image' => array(
