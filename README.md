@@ -35,24 +35,29 @@ Usage is very similar to [ACF Image Field](http://www.advancedcustomfields.com/r
 
 ![Screenshot 2](screenshots/screenshot2.png)
 
-The Image object returns the values in `focuspoint` array:
+Plugin returns an array with image id and top/left values (percentages):
 
 ```
-'focuspoint' 	=> array(
-	'class'		=> 'focuspoint-image',
-	'top'  		=> $value['top'],
-	'left' 		=> $value['left'],
+'image' => array(
+	'id'		=> 42,
+	'top'  		=> 24.5,
+	'left' 		=> 52,
 )
 ```
 Use these new values as you see fit. For example:
 
 ```
-<?php $image = get_field('image'); ?>
+<?php 
+
+$image = get_field('image'); 
+$image_src = wp_get_attachment_image_src( $image['id'], 'large' );
+
+?>
 
 <style>
 #my-image {
-	background-image: url('<?php echo $image['url']; ?>);
-	background-position: <?php echo $image['focuspoint']['left'] . '% ' . $image['focuspoint']['top']; ?>%;
+	background-image: url('<?php echo $image_src[0]; ?>);
+	background-position: <?php echo $image['left'] . '% ' . $image['top']; ?>%;
 	background-size: cover;
 	height: 300px;
 	width: 600px;
