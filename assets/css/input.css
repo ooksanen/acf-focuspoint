@@ -1,0 +1,70 @@
+.acf-focuspoint {
+	position: relative; /*Any position but static should work*/
+}
+.acf-focuspoint-image {
+	display: none;
+}
+.acf-focuspoint .has-image {
+	display: none;
+	position: relative;
+}
+.acf-focuspoint .acf-button-delete {
+	position: absolute;
+	top: -11px;
+	right: -11px;
+	z-index: 9;
+	cursor: pointer;
+}
+.acf-focuspoint .acf-icon {
+	opacity: 0;
+	transition: .25s ease-in-out;
+}
+.acf-focuspoint .acf-icon:hover {
+	color: #D54E21;
+}
+.acf-focuspoint .has-image:hover .acf-icon {
+	opacity: 1;
+}
+.acf-focuspoint.active .no-image {
+	display: none;
+}
+.acf-focuspoint.active .has-image {
+	display: block;
+	float: left;
+}
+.acf-focuspoint.active .has-image img {
+	display: block;
+	float: left;
+	max-width: 100%;
+}
+.focuspoint img {
+	transition: all 500ms ease-in-out;
+	-webkit-transition: all 500ms ease-in-out;
+	-moz-transition: all 500ms ease-in-out;
+}
+.focuspoint-image {
+	position: relative;
+}
+.focuspoint-image img {
+	display: block;
+	max-width: 100%;
+	height:auto;
+	z-index: 0;
+}
+.focuspoint-image img.acf-focuspoint-target-img {
+	cursor: crosshair;
+}
+.focuspoint-image img.focal-point-picker {
+	position: absolute;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	top:50%;
+	left:50%;
+	transition: all 250ms ease-in-out;
+	-webkit-transition: all 250ms ease-in-out;
+	-moz-transition: all 250ms ease-in-out;
+	height: 24px;
+	width: 24px;
+	opacity: 0.8;
+}
