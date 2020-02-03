@@ -40,8 +40,8 @@ Plugin returns an array with image id and top/left values (percentages):
 ```
 'image' => array(
 	'id'		=> 42,
-	'top'  		=> 24.5,
-	'left' 		=> 52,
+	'top'  		=> 40.03,
+	'left' 		=> 82.79,
 )
 ```
 Use these new values as you see fit. For example:
