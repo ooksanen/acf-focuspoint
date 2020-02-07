@@ -1,5 +1,7 @@
 .acf-focuspoint {
 	position: relative; /*Any position but static should work*/
+	float: left;
+	padding-bottom: 1.5rem;
 }
 .acf-focuspoint-image {
 	display: none;
@@ -35,7 +37,6 @@
 .acf-focuspoint.active .has-image img {
 	display: block;
 	float: left;
-	margin-bottom: 1.5rem;
 	max-width: 100%;
 }
 .focuspoint img {
