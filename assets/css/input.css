@@ -35,6 +35,7 @@
 .acf-focuspoint.active .has-image img {
 	display: block;
 	float: left;
+	margin-bottom: 1.5rem;
 	max-width: 100%;
 }
 .focuspoint img {
