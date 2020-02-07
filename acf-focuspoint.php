@@ -42,7 +42,7 @@ class acffp_acf_plugin_focuspoint {
 		// settings
 		// - these will be passed into the field class.
 		$this->settings = array(
-			'version'	=> '1.0.0',
+			'version'	=> '1.0.1',
 			'url'		=> plugin_dir_url( __FILE__ ),
 			'path'		=> plugin_dir_path( __FILE__ )
 		);
@@ -50,7 +50,6 @@ class acffp_acf_plugin_focuspoint {
 		
 		// include field
 		add_action('acf/include_field_types', 	array($this, 'include_field')); // v5
-		add_action('acf/register_fields', 		array($this, 'include_field')); // v4
 	}
 	
 	
@@ -69,13 +68,8 @@ class acffp_acf_plugin_focuspoint {
 	
 	function include_field( $version = false ) {
 		
-		// support empty $version
-		if( !$version ) $version = 4;
-		
-		
 		// load textdomain
 		load_plugin_textdomain( 'acffp', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' ); 
-		
 		
 		// include
 		include_once('fields/class-acffp-acf-field-focuspoint-v' . $version . '.php');
