@@ -176,7 +176,8 @@ class acffp_acf_field_focuspoint extends acf_field {
 
 			<div class="focuspoint-image has-image">
 				<img class="acf-focuspoint-img" src="<?php echo $url; ?>">
-				<img class="focal-point-picker" src="<?php echo $this->settings['url']; ?>assets/images/focal-point-picker.svg?v=4" style="top: <?php echo $data['top']; ?>%; left: <?php echo $data['left']; ?>%;">
+				<img class="focal-point-picker" src="<?php echo $this->settings['url']; ?>assets/images/focal-point-picker.svg" style="top: <?php echo $data['top']; ?>%; left: <?php echo $data['left']; ?>%;">
+				<div class="focuspoint-selection-layer"></div>
 				<span class="acf-button-delete acf-icon -cancel acf-icon-cancel dark" data-name="remove"></span>
 			</div>
 
@@ -214,7 +215,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 		// register & include JS
 		wp_register_script('acffp', "{$url}assets/js/input.js", array('jquery', 'acf-input'), microtime(true) /* $version */ );
 		wp_enqueue_script('acffp');
-    	wp_enqueue_media();
+    		wp_enqueue_media();
 		
 		
 		// register & include CSS
