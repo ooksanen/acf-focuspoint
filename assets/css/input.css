@@ -52,7 +52,14 @@
 	height:auto;
 	z-index: 0;
 }
-.focuspoint-image img.acf-focuspoint-img:hover {
+.focuspoint-image .focuspoint-selection-layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+.focuspoint-image .focuspoint-selection-layer:hover {
 	cursor: crosshair;
 }
 .focuspoint-image img.focal-point-picker {
