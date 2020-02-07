@@ -24,6 +24,7 @@
 			// Elements to get/set 
 			$fp = $field.find('.acf-focuspoint'),
 			$img = $field.find('.acf-focuspoint-img'),
+			$selection = $field.find('.focuspoint-selection-layer'),
 
 			// Buttons to trigger events
 			$add = $field.find('.add-image'),
@@ -97,7 +98,7 @@
 
 		});
 
-		$img.on('click', function (event) {
+		$selection.on('click', function (event) {
 			var iw = $(this).outerWidth();
 			var ih = $(this).outerHeight();
 			var px = event.offsetX;
