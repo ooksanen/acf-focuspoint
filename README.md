@@ -10,6 +10,8 @@ Adds a new field type to ACF allowing users to select a focal point on image.
 
 Works similar to a traditional ACF image field, but once an image is selected and a preview is displayed, this plugin allows selecting a focal point by clicking on the image. Focal point is returned in image array as percentage from left/top.
 
+Requires ACF Pro 5
+
 Tested on ACF Pro 5.8.7.
 
 -----------------------
