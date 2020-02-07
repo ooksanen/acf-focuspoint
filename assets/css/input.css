@@ -51,7 +51,7 @@
 	height:auto;
 	z-index: 0;
 }
-.focuspoint-image img.acf-focuspoint-target-img {
+.focuspoint-image img.acf-focuspoint-img:hover {
 	cursor: crosshair;
 }
 .focuspoint-image img.focal-point-picker {
