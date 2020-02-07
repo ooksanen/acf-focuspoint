@@ -12,7 +12,7 @@ Works similar to a traditional ACF image field, but once an image is selected an
 
 Requires ACF Pro 5
 
-Tested on ACF Pro 5.8.7.
+Tested on ACF Pro 5.8.7
 
 -----------------------
 
