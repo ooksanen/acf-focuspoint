@@ -14,8 +14,6 @@
 	*/
 	
 	function initialize_field( $field ) {
-
-		console.log( $field );
 		
 		// Cache jquery selectors
 		// Values to get/set
@@ -78,7 +76,7 @@
 				$img.attr('src', src.url);
 
 				// Update our post values and values obj
-				$id.val(attachment.id);
+				$id.val(attachment.id).trigger('change');
 
 				values.id = attachment.id;
 
@@ -110,8 +108,8 @@
 				top: y_percentage + '%',
 				left: x_percentage + '%'
 			});
-			$top.val(y_percentage);
-			$left.val(x_percentage);
+			$top.val(y_percentage).trigger('change');
+			$left.val(x_percentage).trigger('change');
 		});
 		
 	}
