@@ -2,6 +2,7 @@
 
 ### 1.0.3
 * Fixed a bug that prevented deleting focuspoint image
+* Started implementing min/max width, height, and file size for image file
 
 ### 1.0.2
 * Moved focus point selection to new element on top of the image to allow for more fine grained selection even very close to current selection

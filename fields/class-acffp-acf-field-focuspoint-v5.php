@@ -110,6 +110,64 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'name'			=> 'preview_size',
 			'choices'		=>	acf_get_image_sizes()
 		));
+		
+		
+		// Min sizes
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Minimum', 'acf-focuspoint'),
+			'instructions'	=> __('Restrict which images can be uploaded. Note: this is not working yet!', 'acf-focuspoint'),
+			'type'			=> 'text',
+			'name'			=> 'min_width',
+			'prepend'		=> __('Width', 'acf-focuspoint'),
+			'append'		=> 'px',
+		));
+		
+		acf_render_field_setting( $field, array(
+			'label'			=> '',
+			'type'			=> 'text',
+			'name'			=> 'min_height',
+			'prepend'		=> __('Height', 'acf-focuspoint'),
+			'append'		=> 'px',
+			'_append' 		=> 'min_width'
+		));
+		
+		acf_render_field_setting( $field, array(
+			'label'			=> '',
+			'type'			=> 'text',
+			'name'			=> 'min_size',
+			'prepend'		=> __('File size', 'acf-focuspoint'),
+			'append'		=> 'MB',
+			'_append' 		=> 'min_width'
+		));	
+		
+		
+		// Max sizes
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Maximum', 'acf-focuspoint'),
+			'instructions'	=> __('Restrict which images can be uploaded. Note: this is not working yet!', 'acf-focuspoint'),
+			'type'			=> 'text',
+			'name'			=> 'max_width',
+			'prepend'		=> __('Width', 'acf-focuspoint'),
+			'append'		=> 'px',
+		));
+		
+		acf_render_field_setting( $field, array(
+			'label'			=> '',
+			'type'			=> 'text',
+			'name'			=> 'max_height',
+			'prepend'		=> __('Height', 'acf-focuspoint'),
+			'append'		=> 'px',
+			'_append' 		=> 'max_width'
+		));
+		
+		acf_render_field_setting( $field, array(
+			'label'			=> '',
+			'type'			=> 'text',
+			'name'			=> 'max_size',
+			'prepend'		=> __('File size', 'acf-focuspoint'),
+			'append'		=> 'MB',
+			'_append' 		=> 'max_width'
+		));	
 
 	}
 	
