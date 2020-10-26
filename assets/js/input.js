@@ -92,9 +92,10 @@
 	    	
 	    	// Reset DOM image attributes
 	    	$img.removeAttr('src');
+	    	$id.val('');
 
 			// Hide canvas and show add image button
-			$fp.removeClass('active');
+			$fp.removeClass('active').trigger('change');
 
 		});
 
