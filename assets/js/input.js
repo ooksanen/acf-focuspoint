@@ -42,28 +42,28 @@
 		var img = $img.get(0)
 
 		// To hold WP media frame
-		var file_frame;
+		var frame;
 
 	    // When we click the add image button...
 		$add.on('click', function(){
 
 			// If the media frame already exists, reopen it.
-			if ( file_frame ) {
-				file_frame.open();
+			if ( frame ) {
+				frame.open();
 				return;
 			}
 
 			// Create the media frame.
-			file_frame = wp.media.frames.file_frame = wp.media({
+			frame = wp.media.frames.frame = wp.media({
 				title: 'Select Image',
 				button: { text: 'Select' }
 			});
 
 			// When an image is selected..
-			file_frame.on('select', function() {
+			frame.on('select', function() {
 
 				// Get selected image objects
-				var attachment 	= file_frame.state().get('selection').first().toJSON(),
+				var attachment 	= frame.state().get('selection').first().toJSON(),
 					src 		= attachment.sizes[values.size];
 
 				// Make UI active (hide add image button, show canvas)
@@ -84,7 +84,7 @@
 			});
 
 			// Finally, open the modal
-			file_frame.open();
+			frame.open();
 		});
 
 		// When we click the delete image button...

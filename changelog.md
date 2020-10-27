@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.0.4
+* Added simple(Classic Editor only?) validation for min/max width, height, and file size
+
 ### 1.0.3
 * Fixed a bug that prevented deleting focuspoint image
 * Started implementing min/max width, height, and file size for image file
