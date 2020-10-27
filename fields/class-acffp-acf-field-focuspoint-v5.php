@@ -538,22 +538,22 @@ class acffp_acf_field_focuspoint extends acf_field {
 		$image_size_kb = filesize( get_attached_file( $value['id'] ) );
 		
 		if( !empty($field['min_width']) && $image[1] < $field['min_width'] ) {
-			$valid = sprintf( __('Image must to be at least %dpx wide. Selected image is %d&times;%d.', 'acf-focuspoint'), $field['min_width'], $image[1], $image[2] );
+			$valid[] = sprintf( __('Image width must be at least %dpx.', 'acf-focuspoint'), $field['min_width'], $image[1], $image[2] );
 		}
-		elseif( !empty($field['min_height']) && $image[2] < $field['min_height'] ) {
-			$valid = sprintf( __('Image must to be at least %dpx high. Selected image is %d&times;%d.', 'acf-focuspoint'), $field['min_height'], $image[1], $image[2] );
+		if( !empty($field['min_height']) && $image[2] < $field['min_height'] ) {
+			$valid[] = sprintf( __('Image height must be at least %dpx.', 'acf-focuspoint'), $field['min_height'], $image[1], $image[2] );
 		}
-		elseif( !empty($field['min_size']) && $image_size_kb < $field['min_size'] * (1024 * 1024) ) {
-			$valid = sprintf( __('Image filesize must be at least %d&nbsp;KB. Selected image is %d&nbsp;KB.', 'acf-focuspoint'), size_format( $field['min_size'] * (1024 * 1024), 2), size_format( $image_size_kb, 2 ) );
+		if( !empty($field['min_size']) && $image_size_kb < $field['min_size'] * (1024 * 1024) ) {
+			$valid[] = sprintf( __('File size must be at least %d&nbsp;KB.', 'acf-focuspoint'), size_format( $field['min_size'] * (1024 * 1024), 2), size_format( $image_size_kb, 2 ) );
 		}
-		elseif( !empty($field['max_width']) && $image[1] > $field['max_width'] ) {
-			$valid = sprintf( __('Image can\'t be more than %dpx wide. Selected image is %d&times;%d.', 'acf-focuspoint'), $field['max_width'], $image[1], $image[2] );
+		if( !empty($field['max_width']) && $image[1] > $field['max_width'] ) {
+			$valid[] = sprintf( __('Image width must not exceed %dpx.', 'acf-focuspoint'), $field['max_width'], $image[1], $image[2] );
 		}
-		elseif( !empty($field['max_height']) && $image[2] > $field['max_height'] ) {
-			$valid = sprintf( __('Image can\'t be more than %dpx high. Selected image is %d&times;%d.', 'acf-focuspoint'), $field['max_height'], $image[1], $image[2] );
+		if( !empty($field['max_height']) && $image[2] > $field['max_height'] ) {
+			$valid[] = sprintf( __('Image height must not exceed %dpx.', 'acf-focuspoint'), $field['max_height'], $image[1], $image[2] );
 		}
-		elseif( !empty($field['max_size']) && $image_size_kb > $field['max_size'] * (1024 * 1024) ) {
-			$valid = sprintf( __('Image file size must be less than %d&nbsp;KB. Selected image is %d&nbsp;KB.', 'acf-focuspoint'), size_format( $field['max_size'] * (1024 * 1024), 2), size_format( $image_size_kb, 2 ) );
+		if( !empty($field['max_size']) && $image_size_kb > $field['max_size'] * (1024 * 1024) ) {
+			$valid[] = sprintf( __('File size must not exceed %d&nbsp;KB.', 'acf-focuspoint'), size_format( $field['max_size'] * (1024 * 1024), 2), size_format( $image_size_kb, 2 ) );
 		}
 		else{
 			$valid = true;
