@@ -42,7 +42,7 @@ class acffp_acf_plugin_focuspoint {
 		// settings
 		// - these will be passed into the field class.
 		$this->settings = array(
-			'version'	=> '1.0.4',
+			'version'	=> '1.0.4.1',
 			'url'		=> plugin_dir_url( __FILE__ ),
 			'path'		=> plugin_dir_path( __FILE__ )
 		);
