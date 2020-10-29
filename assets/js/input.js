@@ -23,11 +23,49 @@
             this.o = acf.get_data(this.$el);
         },
 
-        initialize: function() {
+        initialize: function($el) {
             // add attribute to form
             if (this.o.uploader == 'basic') {
                 this.$el.closest('form').attr('enctype', 'multipart/form-data');
             }
+
+            // Cache jquery selectors
+            // Values to get/set
+            var $id = $el.find('[data-name="acf-focuspoint-img-id"]'),
+                $top = $el.find('[data-name="acf-focuspoint-top"]'),
+                $left = $el.find('[data-name="acf-focuspoint-left"]'),
+
+                // Elements to get/set 
+                $fp = $el.find('.acf-focuspoint'),
+                $img = $el.find('.acf-focuspoint-img'),
+                $selection = $el.find('.focuspoint-selection-layer');
+
+            // Hold/get our values
+            var values = {
+                id: $id.val(),
+                top: $top.val(),
+                left: $left.val(),
+                size: $fp.data('preview_size')
+            };
+
+            // DOM elements
+            var img = $img.get(0);
+
+            $selection.on('click', function(event) {
+                var iw = $(this).outerWidth();
+                var ih = $(this).outerHeight();
+                var px = event.offsetX;
+                var py = event.offsetY;
+                var y_percentage = Math.round(((py / ih * 100) + Number.EPSILON) * 100) / 100;
+                var x_percentage = Math.round(((px / iw * 100) + Number.EPSILON) * 100) / 100;
+                $(this).siblings('.focal-point-picker').css({
+                    top: y_percentage + '%',
+                    left: x_percentage + '%'
+                });
+                $top.val(y_percentage).trigger('change');
+                $left.val(x_percentage).trigger('change');
+
+            });
         },
 
         add: function() {
@@ -134,7 +172,6 @@
             this.$el.find('[data-name="acf-focuspoint-img"]').attr('src', image.url);
             this.$el.find('[data-name="acf-focuspoint-img-id"]').val(image.id).trigger('change');
 
-
             // set div class
             this.$el.addClass('has-value');
 
@@ -172,23 +209,23 @@
             this.render(attachment);
 
             // remove class
-            this.$el.removeClass('has-value');
+            this.$el.removeClass('has-value').trigger('change');
 
         },
 
         change: function(e) {
-            this.$el.find('[data-name="id"]').val(e.$el.val());
+            this.$el.find('[data-name="acf-focuspoint-img-id"]').val(e.$el.val()).trigger('change');
         }
 
     });
 
-    function initialize_field($el) {
+    /*function initialize_field($el) {
 
         // Cache jquery selectors
         // Values to get/set
-        var $id = $el.find('[data-name="id"]'),
-            $top = $el.find('[data-name="focuspoint-top"]'),
-            $left = $el.find('[data-name="focuspoint-left"]'),
+        var $id = $el.find('[data-name="acf-focuspoint-img-id"]'),
+            $top = $el.find('[data-name="acf-focuspoint-top"]'),
+            $left = $el.find('[data-name="acf-focuspoint-left"]'),
 
             // Elements to get/set 
             $fp = $el.find('.acf-focuspoint'),
@@ -220,7 +257,7 @@
             $top.val(y_percentage).trigger('change');
             $left.val(x_percentage).trigger('change');
         });
-    }
+    }*/
 
 
     if (typeof acf.add_action !== 'undefined') {
@@ -244,7 +281,8 @@
             // search $el for fields of type 'focuspoint'
             acf.get_fields({ type: 'focuspoint' }, $el).each(function() {
 
-                initialize_field($(this));
+                //initialize_field($(this));
+                acf.fields.focuspoint.initialize($el)
 
             });
 
@@ -283,8 +321,8 @@
 
     // Initialize dynamic block preview (editor).
     if (window.acf) {
-        window.acf.addAction('render_block_preview/type=focuspoint', initialize_field);
-        $.trigger('change');
+        //window.acf.addAction('render_block_preview/type=focuspoint', initialize_field);
+        window.acf.addAction('render_block_preview/type=focuspoint', acf.fields.focuspoint.initialize);
     }
 
 
