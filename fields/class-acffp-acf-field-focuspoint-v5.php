@@ -70,10 +70,11 @@ class acffp_acf_field_focuspoint extends acf_field {
 		
 		$this->settings = $settings;
 		
-		
+
 		// do not delete!
     	parent::__construct();
-    	
+
+
 	}
 	
 	
@@ -224,23 +225,23 @@ class acffp_acf_field_focuspoint extends acf_field {
 		// create Field HTML
 		?>
 
-		<div class="acf-focuspoint <?php echo $is_active; ?>" data-preview_size="<?php echo $field['preview_size']; ?>">
+		<div class="acf-focuspoint acf-image-uploader <?php echo $is_active; ?>" data-preview_size="<?php echo $field['preview_size']; ?>">
 
-			<input class="acf-focuspoint-id" type="hidden" name="<?php echo $field['name']; ?>[id]" value="<?php echo $id; ?>" />
+			<input data-name="acf-focuspoint-img-id" type="hidden" name="<?php echo $field['name']; ?>[id]" value="<?php echo $id; ?>" />
 
 			<?php foreach ($data as $k => $d): ?>
-				<input class="acf-focuspoint-<?php echo $k ?>" type="hidden" name="<?php echo $field['name']; ?>[<?php echo $k ?>]" value="<?php echo $d ?>" />
+				<input data-name="acf-focuspoint-<?php echo $k ?>" type="hidden" name="<?php echo $field['name']; ?>[<?php echo $k ?>]" value="<?php echo $d ?>" />
 			<?php endforeach ?>
 
-			<div class="focuspoint-image has-image">
-				<img class="acf-focuspoint-img" src="<?php echo $url; ?>">
+			<div class="focuspoint-image <?php echo $url ? 'has-image' : 'no-image' ?>">
+				<img data-name="acf-focuspoint-img" src="<?php echo $url; ?>">
 				<img class="focal-point-picker" src="<?php echo $this->settings['url']; ?>assets/images/focal-point-picker.svg" style="top: <?php echo $data['top']; ?>%; left: <?php echo $data['left']; ?>%;">
 				<div class="focuspoint-selection-layer"></div>
-				<span class="acf-button-delete acf-icon -cancel acf-icon-cancel dark" data-name="remove"></span>
+				<a class="acf-button-delete acf-icon -cancel acf-icon-cancel dark" data-name="remove"></a>
 			</div>
-
-			<div class="no-image">
-				<p><?php _e('No image selected','acf'); ?> <input type="button" class="button add-image" value="<?php _e('Add Image','acf'); ?>" />
+			
+			<div class="view hide-if-value">
+			    <p><?php _e('No image selected','acf'); ?> <a data-name="add" class="acf-button button" href="#"><?php _e('Add Image','acf'); ?></a></p>
 			</div>
 
 		</div>
@@ -503,6 +504,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 	}
 	
 	*/
+	
 	
 	
 	/*

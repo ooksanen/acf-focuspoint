@@ -1,176 +1,291 @@
-(function($){
-	
-	
-	/**
-	*  initialize_field
-	*
-	*  This function will initialize the $field.
-	*
-	*  @date	30/11/17
-	*  @since	5.6.5
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-	
-	function initialize_field( $field ) {
-		
-		// Cache jquery selectors
-		// Values to get/set
-		var $id 	= $field.find('.acf-focuspoint-id'),
-			$top 	= $field.find('.acf-focuspoint-top'),
-			$left 	= $field.find('.acf-focuspoint-left'),
+(function($) {
+    acf.fields.focuspoint = acf.field.extend({
 
-			// Elements to get/set 
-			$fp = $field.find('.acf-focuspoint'),
-			$img = $field.find('.acf-focuspoint-img'),
-			$selection = $field.find('.focuspoint-selection-layer'),
+        type: 'focuspoint',
+        $el: null,
 
-			// Buttons to trigger events
-			$add = $field.find('.add-image'),
-			$del = $field.find('.acf-button-delete');
+        actions: {
+            'ready': 'initialize',
+            'append': 'initialize'
+        },
 
-		// Hold/get our values
-		var values = {
-			id: 	$id.val(),
-			top: 	$top.val(),
-			left: 	$left.val(),
-			size: 	$fp.data('preview_size')
-		};
+        events: {
+            'click a[data-name="add"]': 'add',
+            'click a[data-name="edit"]': 'edit',
+            'click a[data-name="remove"]': 'remove',
+            'change input[type="file"]': 'change'
+        },
 
-		// DOM elements
-		var img = $img.get(0)
+        focus: function() {
+            // get elements
+            this.$el = this.$field.find('.acf-image-uploader');
+            // get options
+            this.o = acf.get_data(this.$el);
+        },
 
-		// To hold WP media frame
-		var frame;
+        initialize: function() {
+            // add attribute to form
+            if (this.o.uploader == 'basic') {
+                this.$el.closest('form').attr('enctype', 'multipart/form-data');
+            }
+        },
 
-	    // When we click the add image button...
-		$add.on('click', function(){
+        add: function() {
+            // reference
+            var self = this,
+                $field = this.$field;
 
-			// If the media frame already exists, reopen it.
-			if ( frame ) {
-				frame.open();
-				return;
-			}
+            // get repeater
+            var $repeater = acf.get_closest_field(this.$field, 'repeater');
 
-			// Create the media frame.
-			frame = wp.media.frames.frame = wp.media({
-				title: 'Select Image',
-				button: { text: 'Select' }
-			});
+            // popup
+            var frame = acf.media.popup({
 
-			// When an image is selected..
-			frame.on('select', function() {
+                title: acf._e('image', 'select'),
+                mode: 'select',
+                type: 'image',
+                field: acf.get_field_key($field),
+                multiple: $repeater.exists(),
+                library: this.o.library,
+                mime_types: this.o.mime_types,
 
-				// Get selected image objects
-				var attachment 	= frame.state().get('selection').first().toJSON(),
-					src 		= attachment.sizes[values.size];
+                select: function(attachment, i) {
 
-				// Make UI active (hide add image button, show canvas)
-	        	$fp.addClass('active');
+                    // select / add another image field?
+                    if (i > 0) {
+                        // vars
+                        var key = acf.get_field_key($field),
+                            $tr = $field.closest('.acf-row');
 
-	        	if (src === undefined) {
-	        		src = attachment;
-	        	}
+                        // reset field
+                        $field = false;
 
-	        	// Set image to new src, triggering on load
-				$img.attr('src', src.url);
+                        // find next image field
+                        $tr.nextAll('.acf-row:visible').each(function() {
 
-				// Update our post values and values obj
-				$id.val(attachment.id).trigger('change');
+                            // get next $field
+                            $field = acf.get_field(key, $(this));
 
-				values.id = attachment.id;
+                            // bail early if $next was not found
+                            if (!$field) {
+                                return;
+                            }
 
-			});
+                            // bail early if next file uploader has value
+                            if ($field.find('.acf-image-uploader.has-value').exists()) {
+                                $field = false;
+                                return;
+                            }
 
-			// Finally, open the modal
-			frame.open();
-		});
+                            // end loop if $next is found
+                            return false;
 
-		// When we click the delete image button...
-		$del.on('click', function(){
-	    	
-	    	// Reset DOM image attributes
-	    	$img.removeAttr('src');
-	    	$id.val('');
+                        });
 
-			// Hide canvas and show add image button
-			$fp.removeClass('active').trigger('change');
+                        // add extra row if next is not found
+                        if (!$field) {
 
-		});
+                            $tr = acf.fields.repeater.doFocus($repeater).add();
 
-		$selection.on('click', function (event) {
-			var iw = $(this).outerWidth();
-			var ih = $(this).outerHeight();
-			var px = event.offsetX;
-			var py = event.offsetY;
-			var y_percentage = Math.round(((py / ih * 100) + Number.EPSILON) * 100) / 100;
-			var x_percentage = Math.round(((px / iw * 100) + Number.EPSILON) * 100) / 100;
-			$(this).siblings('.focal-point-picker').css({
-				top: y_percentage + '%',
-				left: x_percentage + '%'
-			});
-			$top.val(y_percentage).trigger('change');
-			$left.val(x_percentage).trigger('change');
-		});
-		
-	}
-	
-	
-	if( typeof acf.add_action !== 'undefined' ) {
-	
-		/*
-		*  ready & append (ACF5)
-		*
-		*  These two events are called when a field element is ready for initizliation.
-		*  - ready: on page load similar to $(document).ready()
-		*  - append: on new DOM elements appended via repeater field or other AJAX calls
-		*
-		*  @param	n/a
-		*  @return	n/a
-		*/
-		
-		acf.add_action('ready append', function( $el ){
-			
-			// search $el for fields of type 'focal_point'
-			acf.get_fields({ type : 'focuspoint'}, $el).each(function(){
-				
-				initialize_field( $(this) );
-				
-			});
-			
-		});
-		
-		
-	} else {
-		
-		/*
-		*  acf/setup_fields (ACF4)
-		*
-		*  These single event is called when a field element is ready for initizliation.
-		*
-		*  @param	event		an event object. This can be ignored
-		*  @param	element		An element which contains the new HTML
-		*  @return	n/a
-		*/
-		
-		$(document).on('acf/setup_fields', function(e, postbox){
-			
-			// find all relevant fields
-			$(postbox).find('.field[data-field_type="focuspoint"]').each(function(){
-				
-				// initialize
-				initialize_field( $(this) );
-				
-			});
-		
-		});
-	
-	}
-	
-	// Initialize dynamic block preview (editor).
-	if( window.acf ) {
-		window.acf.addAction( 'render_block_preview/type=focuspoint', initialize_field );
-	}
+                            // bail early if no $tr (maximum rows hit)
+                            if (!$tr) {
+                                return false;
+                            }
+
+                            // get next $field
+                            $field = acf.get_field(key, $tr);
+
+                        }
+
+                    }
+
+                    // focus
+                    self.doFocus($field);
+
+                    // render
+                    self.render(self.prepare(attachment));
+
+                }
+
+            });
+
+        },
+
+        prepare: function(attachment) {
+            // vars
+            var image = {
+                id: attachment.id,
+                url: attachment.attributes.url
+            };
+
+            // check for preview size
+            if (acf.isset(attachment.attributes, 'sizes', this.o.preview_size, 'url')) {
+                image.url = attachment.attributes.sizes[this.o.preview_size].url;
+            }
+
+            // return
+            return image;
+
+        },
+
+        render: function(image) {
+
+            // set atts
+            this.$el.find('[data-name="acf-focuspoint-img"]').attr('src', image.url);
+            this.$el.find('[data-name="acf-focuspoint-img-id"]').val(image.id).trigger('change');
+
+
+            // set div class
+            this.$el.addClass('has-value');
+
+        },
+
+        edit: function() {
+            // reference
+            var self = this;
+
+            // popup
+            var frame = acf.media.popup({
+
+                title: acf._e('image', 'edit'),
+                type: 'image',
+                button: acf._e('image', 'update'),
+                mode: 'edit',
+                id: id,
+
+                select: function(attachment, i) {
+                    self.render(self.prepare(attachment)).trigger('change');
+                }
+
+            });
+
+        },
+
+        remove: function() {
+            // vars
+            var attachment = {
+                id: '',
+                url: ''
+            };
+
+            // add file to field
+            this.render(attachment);
+
+            // remove class
+            this.$el.removeClass('has-value');
+
+        },
+
+        change: function(e) {
+            this.$el.find('[data-name="id"]').val(e.$el.val());
+        }
+
+    });
+
+    function initialize_field($el) {
+
+        // Cache jquery selectors
+        // Values to get/set
+        var $id = $el.find('[data-name="id"]'),
+            $top = $el.find('[data-name="focuspoint-top"]'),
+            $left = $el.find('[data-name="focuspoint-left"]'),
+
+            // Elements to get/set 
+            $fp = $el.find('.acf-focuspoint'),
+            $img = $el.find('.acf-focuspoint-img'),
+            $selection = $el.find('.focuspoint-selection-layer');
+
+        // Hold/get our values
+        var values = {
+            id: $id.val(),
+            top: $top.val(),
+            left: $left.val(),
+            size: $fp.data('preview_size')
+        };
+
+        // DOM elements
+        var img = $img.get(0)
+
+        $selection.on('click', function(event) {
+            var iw = $(this).outerWidth();
+            var ih = $(this).outerHeight();
+            var px = event.offsetX;
+            var py = event.offsetY;
+            var y_percentage = Math.round(((py / ih * 100) + Number.EPSILON) * 100) / 100;
+            var x_percentage = Math.round(((px / iw * 100) + Number.EPSILON) * 100) / 100;
+            $(this).siblings('.focal-point-picker').css({
+                top: y_percentage + '%',
+                left: x_percentage + '%'
+            });
+            $top.val(y_percentage).trigger('change');
+            $left.val(x_percentage).trigger('change');
+        });
+    }
+
+
+    if (typeof acf.add_action !== 'undefined') {
+
+        /*
+         *  ready append (ACF5)
+         *
+         *  These are 2 events which are fired during the page load
+         *  ready = on page load similar to $(document).ready()
+         *  append = on new DOM elements appended via repeater field
+         *
+         *  @type    event
+         *  @date    20/07/13
+         *
+         *  @param   $el (jQuery selection) the jQuery element which contains the ACF fields
+         *  @return  n/a
+         */
+
+        acf.add_action('ready append', function($el) {
+
+            // search $el for fields of type 'focuspoint'
+            acf.get_fields({ type: 'focuspoint' }, $el).each(function() {
+
+                initialize_field($(this));
+
+            });
+
+        });
+
+
+    } else {
+
+
+        /*
+         *  acf/setup_fields (ACF4)
+         *
+         *  This event is triggered when ACF adds any new elements to the DOM.
+         *
+         *  @type    function
+         *  @since   1.0.0
+         *  @date    01/01/12
+         *
+         *  @param   event       e: an event object. This can be ignored
+         *  @param   Element     postbox: An element which contains the new HTML
+         *
+         *  @return  n/a
+         */
+
+        $(document).live('acf/setup_fields', function(e, postbox) {
+
+            $(postbox).find('.field[data-field_type="focuspoint"]').each(function() {
+
+                initialize_field($(this));
+
+            });
+
+        });
+
+    }
+
+    // Initialize dynamic block preview (editor).
+    if (window.acf) {
+        window.acf.addAction('render_block_preview/type=focuspoint', initialize_field);
+        $.trigger('change');
+    }
+
 
 })(jQuery);
