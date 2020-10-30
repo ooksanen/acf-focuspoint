@@ -233,7 +233,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 				<input data-name="acf-focuspoint-<?php echo $k ?>" type="hidden" name="<?php echo $field['name']; ?>[<?php echo $k ?>]" value="<?php echo $d ?>" />
 			<?php endforeach ?>
 
-			<div class="focuspoint-image <?php echo $url ? 'has-image' : 'no-image' ?>">
+			<div class="focuspoint-image <?php echo $id ? 'has-image' : 'no-image' ?>">
 				<img data-name="acf-focuspoint-img" src="<?php echo $url; ?>">
 				<img class="focal-point-picker" src="<?php echo $this->settings['url']; ?>assets/images/focal-point-picker.svg" style="top: <?php echo $data['top']; ?>%; left: <?php echo $data['left']; ?>%;">
 				<div class="focuspoint-selection-layer"></div>

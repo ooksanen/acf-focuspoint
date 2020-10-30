@@ -5,9 +5,9 @@
 }
 .acf-focuspoint-image {
 	display: none;
+	margin-right: 1rem;
 }
 .acf-focuspoint .has-image {
-	display: none;
 	position: relative;
 }
 .acf-focuspoint .acf-button-delete {
@@ -27,16 +27,14 @@
 .acf-focuspoint .has-image:hover .acf-icon {
 	opacity: 1;
 }
-.acf-focuspoint.active .no-image {
+.acf-focuspoint .no-image {
 	display: none;
 }
-.acf-focuspoint.active .has-image {
-	display: block;
-	float: left;
+.acf-focuspoint .has-image + .hide-if-value {
+	display: none;
 }
 .acf-focuspoint.active .has-image img {
 	display: block;
-	float: left;
 	max-width: 100%;
 }
 .focuspoint img {

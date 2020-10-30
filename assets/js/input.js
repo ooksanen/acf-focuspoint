@@ -156,6 +156,14 @@
                 url: attachment.attributes.url
             };
 
+            //console.log( 'Hep!' );
+            
+            this.$el.find('.focal-point-picker').css({
+                top: this.$el.find('[data-name="acf-focuspoint-top"]').val() + '%',
+                left: this.$el.find('[data-name="acf-focuspoint-left"]').val() + '%'
+            });
+            this.$el.find('.focuspoint-image.no-image').removeClass('no-image').addClass('has-image');
+
             // check for preview size
             if (acf.isset(attachment.attributes, 'sizes', this.o.preview_size, 'url')) {
                 image.url = attachment.attributes.sizes[this.o.preview_size].url;
@@ -209,55 +217,16 @@
             this.render(attachment);
 
             // remove class
+            this.$el.find('.focuspoint-image.has-image').removeClass('has-image').addClass('no-image');
             this.$el.removeClass('has-value').trigger('change');
 
         },
 
         change: function(e) {
-            this.$el.find('[data-name="acf-focuspoint-img-id"]').val(e.$el.val()).trigger('change');
+            this.$el.find('[data-name="id"]').val(e.$el.val()).trigger('change');
         }
 
     });
-
-    /*function initialize_field($el) {
-
-        // Cache jquery selectors
-        // Values to get/set
-        var $id = $el.find('[data-name="acf-focuspoint-img-id"]'),
-            $top = $el.find('[data-name="acf-focuspoint-top"]'),
-            $left = $el.find('[data-name="acf-focuspoint-left"]'),
-
-            // Elements to get/set 
-            $fp = $el.find('.acf-focuspoint'),
-            $img = $el.find('.acf-focuspoint-img'),
-            $selection = $el.find('.focuspoint-selection-layer');
-
-        // Hold/get our values
-        var values = {
-            id: $id.val(),
-            top: $top.val(),
-            left: $left.val(),
-            size: $fp.data('preview_size')
-        };
-
-        // DOM elements
-        var img = $img.get(0)
-
-        $selection.on('click', function(event) {
-            var iw = $(this).outerWidth();
-            var ih = $(this).outerHeight();
-            var px = event.offsetX;
-            var py = event.offsetY;
-            var y_percentage = Math.round(((py / ih * 100) + Number.EPSILON) * 100) / 100;
-            var x_percentage = Math.round(((px / iw * 100) + Number.EPSILON) * 100) / 100;
-            $(this).siblings('.focal-point-picker').css({
-                top: y_percentage + '%',
-                left: x_percentage + '%'
-            });
-            $top.val(y_percentage).trigger('change');
-            $left.val(x_percentage).trigger('change');
-        });
-    }*/
 
 
     if (typeof acf.add_action !== 'undefined') {
