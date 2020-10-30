@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.1.2
+* Fixed image select form visibility on initial load and other minor (mostly) CSS issues.
+
+### 1.1.1
+* Bug fix: https://github.com/ooksanen/acf-focuspoint/issues/5
+
+### 1.1.0
+* Almost complete rewrite of javascript to add proper support for Gutenberg blocks.
+
 ### 1.0.4
 * Added simple(Classic Editor only?) validation for min/max width, height, and file size
 
