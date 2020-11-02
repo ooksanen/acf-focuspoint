@@ -103,6 +103,24 @@ class acffp_acf_field_focuspoint extends acf_field {
 		*  Please note that you must also have a matching $defaults value for the field name (font_size)
 		*/
 		
+		// clear numeric settings
+		
+		// clear numeric settings
+		$clear = array(
+			'min_width',
+			'min_height',
+			'min_size',
+			'max_width',
+			'max_height',
+			'max_size'
+		);
+		
+		foreach( $clear as $k ) {
+			if( empty($field[$k]) ) {
+				$field[$k] = '';
+			}
+		}
+		
 		// Preview size select
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Preview Size','acf-focuspoint'),
@@ -197,14 +215,11 @@ class acffp_acf_field_focuspoint extends acf_field {
 		// Get set image id
 		$id = (isset($field['value']['id'])) ? $field['value']['id'] : '';
 
-
 		// data vars
 		$data = array(
 			'top'		=>	isset($field['value']['top']) ? $field['value']['top'] : '',
 			'left'		=>	isset($field['value']['left']) ? $field['value']['left'] : '',
 		);
-		
-
 		
 		// If we already have an image set...
 		if ($id) {
@@ -220,7 +235,6 @@ class acffp_acf_field_focuspoint extends acf_field {
 
 		// And set src
 		$url = ($id) ? $img[0] : '';
-		
 		
 		// create Field HTML
 		?>
@@ -529,12 +543,14 @@ class acffp_acf_field_focuspoint extends acf_field {
 	
 	function validate_value( $valid, $value, $field, $input ){
 
-		// vdd( $field );
-
-		if( empty( $value['id'] ) ){
-			return $valid;
-		}
-
+		// vd( $valid );
+		// vdd( empty($value['id']) );
+		
+		// bail early if id empty		
+		if( empty($value['id']) ) return false;
+		
+		// bail ealry if id not numeric
+		if( !is_numeric($value['id']) ) return false;
 
 		$image = wp_get_attachment_image_src( $value['id'], 'full' );
 		$image_size_kb = filesize( get_attached_file( $value['id'] ) );
@@ -563,7 +579,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 		
 		// return
 		return $valid;
-		
+
 	}
 	
 	
