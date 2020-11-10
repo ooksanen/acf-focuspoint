@@ -545,9 +545,12 @@ class acffp_acf_field_focuspoint extends acf_field {
 
 		// vd( $valid );
 		// vdd( empty($value['id']) );
+
+		// Bail early if field not required and value not set
+		if( $field['required'] === 0 && !$value['id'] ) return true;
 		
-		// bail early if id empty		
-		if( empty($value['id']) ) return false;
+		// bail early if field required and id empty		
+		if( $field['required'] !== 0 && empty($value['id']) ) return false;
 		
 		// bail ealry if id not numeric
 		if( !is_numeric($value['id']) ) return false;

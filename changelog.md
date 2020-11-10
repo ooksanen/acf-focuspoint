@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.1.4
+* Fixed Required field validation returning false even on non-required field (https://github.com/ooksanen/acf-focuspoint/issues/7).
+
 ### 1.1.3
 * Fixed Required field validation (https://github.com/ooksanen/acf-focuspoint/issues/6). Note that validation doesn't work in Gutenberg at the moment. See https://github.com/AdvancedCustomFields/acf/issues/113 for more info.
 
