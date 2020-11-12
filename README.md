@@ -76,3 +76,9 @@ $image_src = wp_get_attachment_image_src( $image['id'], 'large' );
 ### Changelog
 
 See `changelog.md`
+
+-----------------------
+
+### Thanks
+
+Thanks to [Elliot Condon](http://www.elliotcondon.com/) for creating Advanced Custom Fields.
