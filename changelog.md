@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.1.5
+* Fixed saving coordinates when no image selected (https://github.com/ooksanen/acf-focuspoint/issues/8).
+* Use minified versions of input.js and input.css
+
 ### 1.1.4
 * Fixed Required field validation returning false even on non-required field (https://github.com/ooksanen/acf-focuspoint/issues/7).
 
