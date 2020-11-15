@@ -157,11 +157,22 @@
             };
 
             //console.log( 'Hep!' );
-            
-            this.$el.find('.focal-point-picker').css({
-                top: this.$el.find('[data-name="acf-focuspoint-top"]').val() + '%',
-                left: this.$el.find('[data-name="acf-focuspoint-left"]').val() + '%'
-            });
+
+            leftVal = this.$el.find('[data-name="acf-focuspoint-left"]').val();
+            topVal = this.$el.find('[data-name="acf-focuspoint-top"]').val();
+
+            if( leftVal && topVal ){
+                this.$el.find('.focal-point-picker').css({
+                    top: topVal + '%',
+                    left: leftVal + '%'
+                });
+            }
+            else {
+                this.$el.find('.focal-point-picker').css({
+                    top: '50%',
+                    left: '50%'
+                });
+            }
             this.$el.find('.focuspoint-image.no-image').removeClass('no-image').addClass('has-image');
 
             // check for preview size
@@ -205,6 +216,10 @@
             });
 
         },
+        
+        removeAttachment: function(){
+            this.render( false );
+        },
 
         remove: function() {
             // vars
@@ -213,8 +228,11 @@
                 url: ''
             };
 
-            // add file to field
-            this.render(attachment);
+            this.removeAttachment();
+
+            // remove position
+            this.$el.find('[data-name="acf-focuspoint-top"]').val('');
+            this.$el.find('[data-name="acf-focuspoint-left"]').val('');
 
             // remove class
             this.$el.find('.focuspoint-image.has-image').removeClass('has-image').addClass('no-image');
@@ -223,7 +241,7 @@
         },
 
         change: function(e) {
-            this.$el.find('[data-name="id"]').val(e.$el.val()).trigger('change');
+            this.$el.find('[data-name="acf-focuspoint-img-id"]').val(e.$el.val()).trigger('change');
         }
 
     });

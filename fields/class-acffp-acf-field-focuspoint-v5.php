@@ -286,13 +286,13 @@ class acffp_acf_field_focuspoint extends acf_field {
 		
 		
 		// register & include JS
-		wp_register_script('acffp', "{$url}assets/js/input.js", array('jquery', 'acf-input'), $version );
+		wp_register_script('acffp', "{$url}assets/js/input.min.js", array('jquery', 'acf-input'), $version );
 		wp_enqueue_script('acffp');
     		wp_enqueue_media();
 		
 		
 		// register & include CSS
-		wp_register_style('acffp', "{$url}assets/css/input.css", array('acf-input'), $version );
+		wp_register_style('acffp', "{$url}assets/css/input.min.css", array('acf-input'), $version );
 		wp_enqueue_style('acffp');
 		
 	}
@@ -465,15 +465,21 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @return	$value
 	*/
 	
-	/*
-	
 	function update_value( $value, $post_id, $field ) {
 		
+		if( empty( $value['id'] ) ){
+			return false;
+		}
+		if( empty( $value['left'] ) && empty( $value['top'] ) ){
+			$value['left'] = 50;
+			$value['top'] = 50;
+		}
+
 		return $value;
 		
 	}
 	
-	*/
+	
 	
 	
 	/*
