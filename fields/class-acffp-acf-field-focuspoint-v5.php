@@ -255,7 +255,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 			</div>
 			
 			<div class="view hide-if-value">
-			    <p><?php _e('No image selected','acf'); ?> <a data-name="add" class="acf-button button" href="#"><?php _e('Add Image','acf'); ?></a></p>
+			    <p><?php _e('No image selected','acf'); ?> <input data-name="add" class="acf-button button" href="#"><?php _e('Add Image','acf'); ?></input></p>
 			</div>
 
 		</div>
