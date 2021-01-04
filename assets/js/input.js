@@ -24,6 +24,7 @@
         },
 
         initialize: function($el) {
+
             // add attribute to form
             if (this.o.uploader == 'basic') {
                 this.$el.closest('form').attr('enctype', 'multipart/form-data');
@@ -32,8 +33,6 @@
             // Cache jquery selectors
             // Values to get/set
             var $id = $el.find('[data-name="acf-focuspoint-img-id"]'),
-                $top = $el.find('[data-name="acf-focuspoint-top"]'),
-                $left = $el.find('[data-name="acf-focuspoint-left"]'),
 
                 // Elements to get/set 
                 $fp = $el.find('.acf-focuspoint'),
@@ -43,8 +42,6 @@
             // Hold/get our values
             var values = {
                 id: $id.val(),
-                top: $top.val(),
-                left: $left.val(),
                 size: $fp.data('preview_size')
             };
 
@@ -52,6 +49,7 @@
             var img = $img.get(0);
 
             $selection.on('click', function(event) {
+
                 var iw = $(this).outerWidth();
                 var ih = $(this).outerHeight();
                 var px = event.offsetX;
@@ -62,6 +60,8 @@
                     top: y_percentage + '%',
                     left: x_percentage + '%'
                 });
+                $top = $(this).parents('.acf-focuspoint').children('[data-name="acf-focuspoint-top"]');
+                $left = $(this).parents('.acf-focuspoint').children('[data-name="acf-focuspoint-left"]');
                 $top.val(y_percentage).trigger('change');
                 $left.val(x_percentage).trigger('change');
 

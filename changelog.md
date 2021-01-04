@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.1.6
+* Fixed a bug where multiple FocusPoint images in a repeater saved same top/left values for all images
+
 ### 1.1.5
 * Fixed saving coordinates when no image selected (https://github.com/ooksanen/acf-focuspoint/issues/8).
 * Use minified versions of input.js and input.css
