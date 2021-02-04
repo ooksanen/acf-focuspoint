@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.1.7
+* Fixed a bug where you couldn't select/upload image if previously selected image was deleted
+
 ### 1.1.6
 * Fixed a bug where multiple FocusPoint images in a repeater saved same top/left values for all images
 
