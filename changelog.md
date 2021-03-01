@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.1.8
+* Bugfix (1.1.7 related)
+
 ### 1.1.7
 * Fixed a bug where you couldn't select/upload image if previously selected image was deleted
 
