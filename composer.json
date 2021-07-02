@@ -1,0 +1,23 @@
+{
+    "name": "ooksanen/acf-focuspoint",
+    "description": "Focuspoint field for ACF",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oskari Oksanen",
+            "email": "shello@oskarioksanen.fi"
+        }
+    ],
+    "minimum-stability" : "stable",
+    "repositories": [
+        {
+            "type":"composer",
+            "url":"https://packagist.org"
+        },
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ]
+}
