@@ -1,7 +1,7 @@
 {
     "name": "ooksanen/acf-focuspoint",
     "description": "Focuspoint field for ACF",
-    "type": "wordpress-plugin",
+    "type": "acf-plugin",
     "license": "MIT",
     "authors": [
         {
