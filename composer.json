@@ -1,6 +1,6 @@
 {
-    "name": "helsingborg-stad/acf-focuspoint",
-    "description": "Focuspoint field for ACF",
+    "name": "helsingborg-stad/acf-focus",
+    "description": "Adds a image focus field",
     "type": "acf-plugin",
     "license": "MIT",
     "authors": [
