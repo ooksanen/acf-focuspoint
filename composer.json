@@ -3,6 +3,11 @@
     "description": "Adds a image focus field",
     "type": "acf-plugin",
     "license": "MIT",
+    "funding": [
+        {
+            "type": "other",
+            "url": "https://www.paypal.com/paypalme/ooksanen"
+        },
     "authors": [
         {
             "name": "Oskari Oksanen",
