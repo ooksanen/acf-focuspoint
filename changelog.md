@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.2.0
+* Added options for Library (All / Uploaded to post) as requested in https://github.com/ooksanen/acf-focuspoint/issues/9 and Allowed file types
+
 ### 1.1.8
 * Bugfix (1.1.7 related)
 

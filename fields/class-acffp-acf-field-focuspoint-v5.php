@@ -52,7 +52,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 		*/
 		
 		$this->defaults = array(
-			'preview_size'	=>	'large'
+			'preview_size'	=>	'large',
+			'library'		=> 'all',
+			'mime_types'	=> '',
 		);
 		
 		
@@ -131,6 +133,20 @@ class acffp_acf_field_focuspoint extends acf_field {
 		));
 		
 		
+		// library
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Library','acf'),
+			'instructions'	=> __('Limit the media library choice','acf'),
+			'type'			=> 'radio',
+			'name'			=> 'library',
+			'layout'		=> 'horizontal',
+			'choices' 		=> array(
+				'all'			=> __('All', 'acf'),
+				'uploadedTo'	=> __('Uploaded to post', 'acf')
+			)
+		));
+		
+		
 		// Min sizes
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Minimum', 'acf-focuspoint'),
@@ -187,6 +203,15 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'append'		=> 'MB',
 			'_append' 		=> 'max_width'
 		));	
+		
+		
+		// allowed type
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Allowed file types','acf'),
+			'instructions'	=> __('Comma separated list. Leave blank for all types','acf'),
+			'type'			=> 'text',
+			'name'			=> 'mime_types',
+		));
 
 	}
 	
@@ -239,7 +264,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 		// create Field HTML
 		?>
 
-		<div class="acf-focuspoint acf-image-uploader <?php echo $is_active; ?>" data-preview_size="<?php echo $field['preview_size']; ?>">
+		<div class="acf-focuspoint acf-image-uploader <?php echo $is_active; ?>" data-preview_size="<?php echo $field['preview_size']; ?>" data-library="<?php echo $field['library']; ?>" data-mime_types="<?php echo $field['mime_types']; ?>">
 
 			<input data-name="acf-focuspoint-img-id" type="hidden" name="<?php echo $field['name']; ?>[id]" value="<?php echo $id; ?>" />
 
