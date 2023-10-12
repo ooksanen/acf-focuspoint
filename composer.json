@@ -1,0 +1,29 @@
+{
+    "name": "ooksanen/acf-focuspoint",
+    "description": "Adds a image focus field",
+    "type": "wordpress-muplugin",
+    "license": "MIT",
+    "funding": [
+        {
+            "type": "other",
+            "url": "https://www.paypal.com/paypalme/ooksanen"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Oskari Oksanen",
+            "email": "hello@oskarioksanen.fi"
+        }
+    ],
+    "minimum-stability" : "stable",
+    "repositories": [
+        {
+            "type":"composer",
+            "url":"https://packagist.org"
+        },
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ]
+}

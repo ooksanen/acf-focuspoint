@@ -24,7 +24,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @return	n/a
 	*/
 	
-	function __construct( $settings ) {
+	function __construct() {
 		
 		/*
 		*  name (string) Single word, no spaces. Underscores allowed
@@ -70,7 +70,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 		*  settings (array) Store plugin settings (url, path, version) as a reference for later use with assets
 		*/
 		
-		$this->settings = $settings;
+		$this->settings = acffp_acf_plugin_focuspoint::$settings;
 		
 
 		// do not delete!
@@ -721,7 +721,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 
 
 // initialize
-new acffp_acf_field_focuspoint( $this->settings );
+acf_register_field_type( 'acffp_acf_field_focuspoint' );
 
 
 // class_exists check

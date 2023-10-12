@@ -4,7 +4,7 @@
 Plugin Name: ACF: FocusPoint
 Plugin URI: https://github.com/ooksanen/acf-focuspoint/
 Description: Adds a new "FocusPoint" field type to Advanced Custom Fields allowing users to select a focal point on images.
-Version: 1.2.0
+Version: 1.1.8
 Author: Oskari Oksanen
 Author URI: https://oskarioksanen.fi
 License: GPLv2 or later
@@ -21,7 +21,7 @@ if( !class_exists('acffp_acf_plugin_focuspoint') ) :
 class acffp_acf_plugin_focuspoint {
 	
 	// vars
-	var $settings;
+	public static array $settings;
 	
 	
 	/*
@@ -41,8 +41,8 @@ class acffp_acf_plugin_focuspoint {
 		
 		// settings
 		// - these will be passed into the field class.
-		$this->settings = array(
-			'version'	=> '1.2.0',
+		self::$settings = array(
+			'version'	=> '1.2.1',
 			'url'		=> plugin_dir_url( __FILE__ ),
 			'path'		=> plugin_dir_path( __FILE__ )
 		);
