@@ -21,7 +21,7 @@ if( !class_exists('acffp_acf_plugin_focuspoint') ) :
 class acffp_acf_plugin_focuspoint {
 	
 	// vars
-	var $settings;
+	public static array $settings;
 	
 	
 	/*
@@ -41,7 +41,7 @@ class acffp_acf_plugin_focuspoint {
 		
 		// settings
 		// - these will be passed into the field class.
-		$this->settings = array(
+		self::$settings = array(
 			'version'	=> '1.1.8',
 			'url'		=> plugin_dir_url( __FILE__ ),
 			'path'		=> plugin_dir_path( __FILE__ )
