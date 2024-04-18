@@ -726,5 +726,3 @@ acf_register_field_type( 'acffp_acf_field_focuspoint' );
 
 // class_exists check
 endif;
-
-?>
