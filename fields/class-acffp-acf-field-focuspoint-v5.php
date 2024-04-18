@@ -495,7 +495,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 		if( empty( $value['id'] ) ){
 			return false;
 		}
-		if( empty( $value['left'] ) && empty( $value['top'] ) ){
+		if( ( !isset( $value['left'] ) || $value['left'] === '' ) && ( !isset( $value['top'] ) || $value['top'] === '' ) ){
 			$value['left'] = 50;
 			$value['top'] = 50;
 		}
