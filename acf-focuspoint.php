@@ -84,5 +84,3 @@ new acffp_acf_plugin_focuspoint();
 
 // class_exists check
 endif;
-	
-?>
