@@ -34,7 +34,7 @@
             // Values to get/set
             var $id = $el.find('[data-name="acf-focuspoint-img-id"]'),
 
-                // Elements to get/set 
+                // Elements to get/set
                 $fp = $el.find('.acf-focuspoint'),
                 $img = $el.find('.acf-focuspoint-img'),
                 $selection = $el.find('.focuspoint-selection-layer');
@@ -200,6 +200,8 @@
             // reference
             var self = this;
 
+            var id = this.$el.find('[data-name="acf-focuspoint-img-id"]').val();
+
             // popup
             var frame = acf.media.popup({
 
@@ -208,15 +210,13 @@
                 button: acf._e('image', 'update'),
                 mode: 'edit',
                 id: id,
-
-                select: function(attachment, i) {
-                    self.render(self.prepare(attachment)).trigger('change');
-                }
+                library: { post__in: [id]},
 
             });
 
+
         },
-        
+
         removeAttachment: function(){
             this.render( false );
         },

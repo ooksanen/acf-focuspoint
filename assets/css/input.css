@@ -10,21 +10,11 @@
 .acf-focuspoint .has-image {
 	position: relative;
 }
-.acf-focuspoint .acf-button-delete {
-	position: absolute;
-	top: -11px;
-	right: -11px;
-	z-index: 9;
-	cursor: pointer;
+.focuspoint-image.has-image .acf-actions {
+  display: block;
+  opacity: 0;
 }
-.acf-focuspoint .acf-icon {
-	opacity: 0;
-	transition: .25s ease-in-out;
-}
-.acf-focuspoint .acf-icon:hover {
-	color: #D54E21;
-}
-.acf-focuspoint .has-image:hover .acf-icon {
+.focuspoint-image.has-image:hover .acf-actions {
 	opacity: 1;
 }
 .acf-focuspoint .no-image {

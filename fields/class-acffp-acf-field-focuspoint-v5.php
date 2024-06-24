@@ -276,7 +276,11 @@ class acffp_acf_field_focuspoint extends acf_field {
 				<img data-name="acf-focuspoint-img" src="<?php echo $url; ?>">
 				<img class="focal-point-picker" src="<?php echo $this->settings['url']; ?>assets/images/focal-point-picker.svg" style="top: <?php echo $data['top']; ?>%; left: <?php echo $data['left']; ?>%;">
 				<div class="focuspoint-selection-layer"></div>
-				<a class="acf-button-delete acf-icon -cancel acf-icon-cancel dark" data-name="remove"></a>
+				
+                <div class="acf-actions -hover">
+                    <a class="acf-icon -pencil dark" data-name="edit" href="#" title="Edit"></a>
+                    <a class="acf-icon -cancel dark" data-name="remove" href="#" title="Remove"></a>
+                </div>
 			</div>
 			
 			<div class="view hide-if-value">
@@ -311,13 +315,13 @@ class acffp_acf_field_focuspoint extends acf_field {
 		
 		
 		// register & include JS
-		wp_register_script('acffp', "{$url}assets/js/input.min.js", array('jquery', 'acf-input'), $version );
+		wp_register_script('acffp', "{$url}assets/js/input.js", array('jquery', 'acf-input'), $version );
 		wp_enqueue_script('acffp');
     		wp_enqueue_media();
 		
 		
 		// register & include CSS
-		wp_register_style('acffp', "{$url}assets/css/input.min.css", array('acf-input'), $version );
+		wp_register_style('acffp', "{$url}assets/css/input.css", array('acf-input'), $version );
 		wp_enqueue_style('acffp');
 		
 	}
