@@ -19,11 +19,11 @@ if( ! defined( 'ABSPATH' ) ) exit;
 if( !class_exists('acffp_acf_plugin_focuspoint') ) :
 
 class acffp_acf_plugin_focuspoint {
-	
+
 	// vars
 	public static array $settings;
-	
-	
+
+
 	/*
 	*  __construct
 	*
@@ -36,9 +36,9 @@ class acffp_acf_plugin_focuspoint {
 	*  @param	void
 	*  @return	void
 	*/
-	
+
 	function __construct() {
-		
+
 		// settings
 		// - these will be passed into the field class.
 		self::$settings = array(
@@ -46,13 +46,14 @@ class acffp_acf_plugin_focuspoint {
 			'url'		=> plugin_dir_url( __FILE__ ),
 			'path'		=> plugin_dir_path( __FILE__ )
 		);
-		
-		
+
+
 		// include field
 		add_action('acf/include_field_types', array($this, 'include_field')); // v5
+		add_filter('acf/load_value/type=image', array($this, 'load_value_image'));
 	}
-	
-	
+
+
 	/*
 	*  include_field
 	*
@@ -65,16 +66,39 @@ class acffp_acf_plugin_focuspoint {
 	*  @param	$version (int) major ACF version. Defaults to false
 	*  @return	void
 	*/
-	
+
 	function include_field( $version = false ) {
-		
+
 		// load textdomain
-		load_plugin_textdomain( 'acffp', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' ); 
-		
+		load_plugin_textdomain( 'acffp', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' );
+
 		// include
 		include_once('fields/class-acffp-acf-field-focuspoint-v' . $version . '.php');
 	}
-	
+
+	/**
+	 * Load the value for an image field if it previously was a focuspoint field
+	 */
+	public function load_value_image($value) {
+		if ($this->has_exact_keys($value, ['id', 'left', 'top'])) {
+			return $value['id'];
+		}
+		return $value;
+	}
+
+	/**
+	 * Checks if an array has exactly the keys requested
+	 */
+	private function has_exact_keys($array, $keys) {
+		if (!is_array($array)) {
+			return false;
+		}
+		$arrayKeys = array_keys($array);
+		sort($arrayKeys);
+		sort($keys);
+		return $arrayKeys === $keys;
+	}
+
 }
 
 

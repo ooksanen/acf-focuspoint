@@ -9,8 +9,8 @@ if( !class_exists('acffp_acf_field_focuspoint') ) :
 
 
 class acffp_acf_field_focuspoint extends acf_field {
-	
-	
+
+
 	/*
 	*  __construct
 	*
@@ -23,63 +23,63 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function __construct() {
-		
+
 		/*
 		*  name (string) Single word, no spaces. Underscores allowed
 		*/
-		
+
 		$this->name = 'focuspoint';
-		
-		
+
+
 		/*
 		*  label (string) Multiple words, can include spaces, visible when selecting a field type
 		*/
-		
+
 		$this->label = __('FocusPoint', 'acffp');
-		
-		
+
+
 		/*
 		*  category (string) basic | content | choice | relational | jquery | layout | CUSTOM GROUP NAME
 		*/
-		
+
 		$this->category = 'jquery';
-		
-		
+
+
 		/*
 		*  defaults (array) Array of default settings which are merged into the field object. These are used later in settings
 		*/
-		
+
 		$this->defaults = array(
 			'preview_size'	=>	'large',
 			'library'		=> 'all',
 			'mime_types'	=> '',
 		);
-		
-		
+
+
 		/*
 		*  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
 		*  var message = acf._e('focuspoint', 'error');
 		*/
-		
+
 		$this->l10n = array();
-		
-		
+
+
 		/*
 		*  settings (array) Store plugin settings (url, path, version) as a reference for later use with assets
 		*/
-		
+
 		$this->settings = acffp_acf_plugin_focuspoint::$settings;
-		
+
 
 		// do not delete!
     	parent::__construct();
 
 
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -92,9 +92,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$field (array) the $field being edited
 	*  @return	n/a
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		/*
 		*  acf_render_field_setting
 		*
@@ -104,9 +104,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 		*  More than one setting can be added by copy/paste the above code.
 		*  Please note that you must also have a matching $defaults value for the field name (font_size)
 		*/
-		
+
 		// clear numeric settings
-		
+
 		// clear numeric settings
 		$clear = array(
 			'min_width',
@@ -116,13 +116,13 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'max_height',
 			'max_size'
 		);
-		
+
 		foreach( $clear as $k ) {
 			if( empty($field[$k]) ) {
 				$field[$k] = '';
 			}
 		}
-		
+
 		// Preview size select
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Preview Size','acf-focuspoint'),
@@ -131,8 +131,8 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'name'			=> 'preview_size',
 			'choices'		=>	acf_get_image_sizes()
 		));
-		
-		
+
+
 		// library
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Library','acf'),
@@ -145,8 +145,8 @@ class acffp_acf_field_focuspoint extends acf_field {
 				'uploadedTo'	=> __('Uploaded to post', 'acf')
 			)
 		));
-		
-		
+
+
 		// Min sizes
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Minimum', 'acf-focuspoint'),
@@ -156,7 +156,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'prepend'		=> __('Width', 'acf-focuspoint'),
 			'append'		=> 'px',
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -165,7 +165,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'append'		=> 'px',
 			'_append' 		=> 'min_width'
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -173,9 +173,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'prepend'		=> __('File size', 'acf-focuspoint'),
 			'append'		=> 'MB',
 			'_append' 		=> 'min_width'
-		));	
-		
-		
+		));
+
+
 		// Max sizes
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Maximum', 'acf-focuspoint'),
@@ -185,7 +185,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'prepend'		=> __('Width', 'acf-focuspoint'),
 			'append'		=> 'px',
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -194,7 +194,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'append'		=> 'px',
 			'_append' 		=> 'max_width'
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -202,9 +202,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'prepend'		=> __('File size', 'acf-focuspoint'),
 			'append'		=> 'MB',
 			'_append' 		=> 'max_width'
-		));	
-		
-		
+		));
+
+
 		// allowed type
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Allowed file types','acf'),
@@ -214,9 +214,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 		));
 
 	}
-	
-	
-	
+
+
+
 	/*
 	*  render_field()
 	*
@@ -231,12 +231,12 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$field (array) the $field being edited
 	*  @return	n/a
 	*/
-	
+
 	function render_field( $field ) {
 
 		// Merge defaults
 		$field = array_merge($this->defaults, $field);
-		
+
 		// Get set image id
 		$id = (isset($field['value']['id'])) ? $field['value']['id'] : '';
 
@@ -245,22 +245,22 @@ class acffp_acf_field_focuspoint extends acf_field {
 			'top'		=>	isset($field['value']['top']) ? $field['value']['top'] : '',
 			'left'		=>	isset($field['value']['left']) ? $field['value']['left'] : '',
 		);
-		
+
 		// If we already have an image set...
 		if ($id) {
-			
+
 			// Get image by ID, in size set via options
 			$img = wp_get_attachment_image_src($id, $field['preview_size']);
-						
+
 		}
-			
+
 		// If image found...
 		// Set to hide add image button / show canvas
 		$is_active 	= ($id) ? 'active' : '';
 
 		// And set src
 		$url = ($id) ? $img[0] : '';
-		
+
 		// create Field HTML
 		?>
 
@@ -278,7 +278,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 				<div class="focuspoint-selection-layer"></div>
 				<a class="acf-button-delete acf-icon -cancel acf-icon-cancel dark" data-name="remove"></a>
 			</div>
-			
+
 			<div class="view hide-if-value">
 			    <p><?php _e('No image selected','acf'); ?> <a data-name="add" class="acf-button button" href="#"><?php _e('Add Image','acf'); ?></a></p>
 			</div>
@@ -288,8 +288,8 @@ class acffp_acf_field_focuspoint extends acf_field {
 		<?php
 
 	}
-	
-		
+
+
 	/*
 	*  input_admin_enqueue_scripts()
 	*
@@ -304,27 +304,27 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @return	n/a
 	*/
 	function input_admin_enqueue_scripts() {
-		
+
 		// vars
 		$url = $this->settings['url'];
 		$version = $this->settings['version'];
-		
-		
+
+
 		// register & include JS
 		wp_register_script('acffp', "{$url}assets/js/input.min.js", array('jquery', 'acf-input'), $version );
 		wp_enqueue_script('acffp');
     		wp_enqueue_media();
-		
-		
+
+
 		// register & include CSS
 		wp_register_style('acffp', "{$url}assets/css/input.min.css", array('acf-input'), $version );
 		wp_enqueue_style('acffp');
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 	/*
 	*  input_admin_head()
 	*
@@ -340,21 +340,21 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*/
 
 	/*
-		
+
 	function input_admin_head() {
-	
-		
-		
+
+
+
 	}
-	
+
 	*/
-	
-	
+
+
 	/*
    	*  input_form_data()
    	*
    	*  This function is called once on the 'input' page between the head and footer
-   	*  There are 2 situations where ACF did not load during the 'acf/input_admin_enqueue_scripts' and 
+   	*  There are 2 situations where ACF did not load during the 'acf/input_admin_enqueue_scripts' and
    	*  'acf/input_admin_head' actions because ACF did not know it was going to be used. These situations are
    	*  seen on comments / user edit forms on the front end. This function will always be called, and includes
    	*  $args that related to the current screen such as $args['post_id']
@@ -366,18 +366,18 @@ class acffp_acf_field_focuspoint extends acf_field {
    	*  @param	$args (array)
    	*  @return	n/a
    	*/
-   	
+
    	/*
-   	
+
    	function input_form_data( $args ) {
-	   	
-		
-	
+
+
+
    	}
-   	
+
    	*/
-	
-	
+
+
 	/*
 	*  input_admin_footer()
 	*
@@ -393,16 +393,16 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*/
 
 	/*
-		
+
 	function input_admin_footer() {
-	
-		
-		
+
+
+
 	}
-	
+
 	*/
-	
-	
+
+
 	/*
 	*  field_group_admin_enqueue_scripts()
 	*
@@ -418,14 +418,14 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*/
 
 	/*
-	
+
 	function field_group_admin_enqueue_scripts() {
-		
+
 	}
-	
+
 	*/
 
-	
+
 	/*
 	*  field_group_admin_head()
 	*
@@ -441,11 +441,11 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*/
 
 	/*
-	
+
 	function field_group_admin_head() {
-	
+
 	}
-	
+
 	*/
 
 
@@ -463,18 +463,16 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	$value
 	*/
-	
-	/*
-	
+
+
 	function load_value( $value, $post_id, $field ) {
-		
+
 		return $value;
-		
+
 	}
-	
-	*/
-	
-	
+
+
+
 	/*
 	*  update_value()
 	*
@@ -489,9 +487,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	$value
 	*/
-	
+
 	function update_value( $value, $post_id, $field ) {
-		
+
 		if( empty( $value['id'] ) ){
 			return false;
 		}
@@ -501,12 +499,12 @@ class acffp_acf_field_focuspoint extends acf_field {
 		}
 
 		return $value;
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 	/*
 	*  format_value()
 	*
@@ -522,36 +520,36 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*
 	*  @return	$value (mixed) the modified value
 	*/
-		
+
 	/*
-	
+
 	function format_value( $value, $post_id, $field ) {
-		
+
 		// bail early if no value
 		if( empty($value) ) {
-		
+
 			return $value;
-			
+
 		}
-		
-		
+
+
 		// apply setting
-		if( $field['font_size'] > 12 ) { 
-			
+		if( $field['font_size'] > 12 ) {
+
 			// format the value
 			// $value = 'something';
-		
+
 		}
-		
-		
+
+
 		// return
 		return $value;
 	}
-	
+
 	*/
-	
-	
-	
+
+
+
 	/*
 	*  validate_value()
 	*
@@ -569,9 +567,9 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$input (string) the corresponding input name for $_POST value
 	*  @return	$valid
 	*/
-	
-	
-	
+
+
+
 	function validate_value( $valid, $value, $field, $input ){
 
 		// vd( $valid );
@@ -579,16 +577,16 @@ class acffp_acf_field_focuspoint extends acf_field {
 
 		// Bail early if field not required and value not set
 		if( $field['required'] === 0 && !$value['id'] ) return true;
-		
-		// bail early if field required and id empty		
+
+		// bail early if field required and id empty
 		if( $field['required'] !== 0 && empty($value['id']) ) return false;
-		
+
 		// bail ealry if id not numeric
 		if( !is_numeric($value['id']) ) return false;
 
 		$image = wp_get_attachment_image_src( $value['id'], 'full' );
 		$image_size_kb = filesize( get_attached_file( $value['id'] ) );
-		
+
 		if( !empty($field['min_width']) && $image[1] < $field['min_width'] ) {
 			$valid = sprintf( __('Image width must be at least %dpx.', 'acf-focuspoint'), $field['min_width'], $image[1], $image[2] );
 		}
@@ -610,15 +608,15 @@ class acffp_acf_field_focuspoint extends acf_field {
 		else{
 			$valid = true;
 		}
-		
+
 		// return
 		return $valid;
 
 	}
-	
-	
-	
-	
+
+
+
+
 	/*
 	*  delete_value()
 	*
@@ -633,18 +631,18 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$key (string) the $meta_key which the value was deleted
 	*  @return	n/a
 	*/
-	
+
 	/*
-	
+
 	function delete_value( $post_id, $key ) {
-		
-		
-		
+
+
+
 	}
-	
+
 	*/
-	
-	
+
+
 	/*
 	*  load_field()
 	*
@@ -652,23 +650,23 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*
 	*  @type	filter
 	*  @date	23/01/2013
-	*  @since	3.6.0	
+	*  @since	3.6.0
 	*
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	$field
 	*/
-	
+
 	/*
-	
+
 	function load_field( $field ) {
-		
+
 		return $field;
-		
-	}	
-	
+
+	}
+
 	*/
-	
-	
+
+
 	/*
 	*  update_field()
 	*
@@ -681,18 +679,18 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	$field
 	*/
-	
+
 	/*
-	
+
 	function update_field( $field ) {
-		
+
 		return $field;
-		
-	}	
-	
+
+	}
+
 	*/
-	
-	
+
+
 	/*
 	*  delete_field()
 	*
@@ -705,18 +703,18 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	n/a
 	*/
-	
+
 	/*
-	
+
 	function delete_field( $field ) {
-		
-		
-		
-	}	
-	
+
+
+
+	}
+
 	*/
-	
-	
+
+
 }
 
 
