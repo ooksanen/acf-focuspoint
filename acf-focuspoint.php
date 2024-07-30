@@ -84,7 +84,7 @@ class acffp_acf_plugin_focuspoint {
 			$this->has_exact_keys($value, ['id', 'left', 'top'])
 			&& is_numeric($value['id'])
 			&& wp_attachment_is_image($value['id'])
-			) {
+		) {
 			return intval($value['id']);
 		}
 		return $value;
