@@ -75,3 +75,7 @@
 	width: 24px;
 	opacity: 0.8;
 }
+
+.acf-field-object-focuspoint .acf-hl[data-cols="3"] > li {
+	width: auto;
+}
