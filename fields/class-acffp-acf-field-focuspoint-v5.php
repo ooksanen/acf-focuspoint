@@ -80,139 +80,23 @@ class acffp_acf_field_focuspoint extends acf_field {
 	}
 	
 	
-	/*
-	*  render_field_settings()
-	*
-	*  Create extra settings for your field. These are visible when editing a field
-	*
-	*  @type	action
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$field (array) the $field being edited
-	*  @return	n/a
+	/**
+	* Render the same validation settings as for the image field
 	*/
-	
-	function render_field_settings( $field ) {
-		
-		/*
-		*  acf_render_field_setting
-		*
-		*  This function will create a setting for your field. Simply pass the $field parameter and an array of field settings.
-		*  The array of settings does not require a `value` or `prefix`; These settings are found from the $field array.
-		*
-		*  More than one setting can be added by copy/paste the above code.
-		*  Please note that you must also have a matching $defaults value for the field name (font_size)
-		*/
-		
-		// clear numeric settings
-		
-		// clear numeric settings
-		$clear = array(
-			'min_width',
-			'min_height',
-			'min_size',
-			'max_width',
-			'max_height',
-			'max_size'
-		);
-		
-		foreach( $clear as $k ) {
-			if( empty($field[$k]) ) {
-				$field[$k] = '';
-			}
-		}
-		
-		// Preview size select
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Preview Size','acf-focuspoint'),
-			'instructions'	=> __('Image used to create a FocusPoint. Should be around the same image ratio as Image Size','acf-focuspoint'),
-			'type'			=> 'select',
-			'name'			=> 'preview_size',
-			'choices'		=>	acf_get_image_sizes()
-		));
-		
-		
-		// library
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Library','acf'),
-			'instructions'	=> __('Limit the media library choice','acf'),
-			'type'			=> 'radio',
-			'name'			=> 'library',
-			'layout'		=> 'horizontal',
-			'choices' 		=> array(
-				'all'			=> __('All', 'acf'),
-				'uploadedTo'	=> __('Uploaded to post', 'acf')
-			)
-		));
-		
-		
-		// Min sizes
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Minimum', 'acf-focuspoint'),
-			'instructions'	=> __('Restrict which images can be uploaded. Note: this is not working yet!', 'acf-focuspoint'),
-			'type'			=> 'text',
-			'name'			=> 'min_width',
-			'prepend'		=> __('Width', 'acf-focuspoint'),
-			'append'		=> 'px',
-		));
-		
-		acf_render_field_setting( $field, array(
-			'label'			=> '',
-			'type'			=> 'text',
-			'name'			=> 'min_height',
-			'prepend'		=> __('Height', 'acf-focuspoint'),
-			'append'		=> 'px',
-			'_append' 		=> 'min_width'
-		));
-		
-		acf_render_field_setting( $field, array(
-			'label'			=> '',
-			'type'			=> 'text',
-			'name'			=> 'min_size',
-			'prepend'		=> __('File size', 'acf-focuspoint'),
-			'append'		=> 'MB',
-			'_append' 		=> 'min_width'
-		));	
-		
-		
-		// Max sizes
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Maximum', 'acf-focuspoint'),
-			'instructions'	=> __('Restrict which images can be uploaded. Note: this is not working yet!', 'acf-focuspoint'),
-			'type'			=> 'text',
-			'name'			=> 'max_width',
-			'prepend'		=> __('Width', 'acf-focuspoint'),
-			'append'		=> 'px',
-		));
-		
-		acf_render_field_setting( $field, array(
-			'label'			=> '',
-			'type'			=> 'text',
-			'name'			=> 'max_height',
-			'prepend'		=> __('Height', 'acf-focuspoint'),
-			'append'		=> 'px',
-			'_append' 		=> 'max_width'
-		));
-		
-		acf_render_field_setting( $field, array(
-			'label'			=> '',
-			'type'			=> 'text',
-			'name'			=> 'max_size',
-			'prepend'		=> __('File size', 'acf-focuspoint'),
-			'append'		=> 'MB',
-			'_append' 		=> 'max_width'
-		));	
-		
-		
-		// allowed type
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Allowed file types','acf'),
-			'instructions'	=> __('Comma separated list. Leave blank for all types','acf'),
-			'type'			=> 'text',
-			'name'			=> 'mime_types',
-		));
+	function render_field_validation_settings( $field ) {
+		$this->get_image_field_instance()->render_field_validation_settings( $field );
+	}
 
+	/**
+	* Render the same presentation settings as for the image field
+	*/
+	function render_field_presentation_settings( $field ) {
+		$this->get_image_field_instance()->render_field_presentation_settings( $field );
+	}
+
+	/** @return acf_field_image */
+	function get_image_field_instance() {
+		return acf_get_field_type( 'image' );
 	}
 	
 	
