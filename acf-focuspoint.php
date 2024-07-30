@@ -50,7 +50,7 @@ class acffp_acf_plugin_focuspoint {
 
 		// include field
 		add_action('acf/include_field_types', array($this, 'include_field')); // v5
-		add_filter('acf/load_value/type=image', array($this, 'load_value_image'));
+		add_filter('acf/load_value/type=image', array($this, 'load_value_image'), -999);
 	}
 
 
