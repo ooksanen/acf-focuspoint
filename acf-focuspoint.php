@@ -80,8 +80,12 @@ class acffp_acf_plugin_focuspoint {
 	 * Load the value for an image field if it previously was a focuspoint field
 	 */
 	public function load_value_image($value) {
-		if ($this->has_exact_keys($value, ['id', 'left', 'top'])) {
-			return $value['id'];
+		if (
+			$this->has_exact_keys($value, ['id', 'left', 'top'])
+			&& is_numeric($value['id'])
+			&& wp_attachment_is_image($value['id'])
+			) {
+			return intval($value['id']);
 		}
 		return $value;
 	}
