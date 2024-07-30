@@ -465,7 +465,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @return	$value
 	*/
 	function load_value( $value, $post_id, $field ) {
-		if (is_int($value)) {
+		if (is_int($value) && wp_attachment_is_image($value)) {
 			return array(
 				'id' => $value,
 				'top' => 50,
