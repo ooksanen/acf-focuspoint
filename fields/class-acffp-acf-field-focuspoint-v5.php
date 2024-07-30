@@ -453,6 +453,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  load_value()
 	*
 	*  This filter is applied to the $value after it is loaded from the db
+	*  Correctly format the value if the field previously was an image field
 	*
 	*  @type	filter
 	*  @since	3.6
@@ -463,12 +464,15 @@ class acffp_acf_field_focuspoint extends acf_field {
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	$value
 	*/
-
-
 	function load_value( $value, $post_id, $field ) {
-
+		if (is_int($value)) {
+			return array(
+				'id' => $value,
+				'top' => 50,
+				'left' => 50
+			);
+		}
 		return $value;
-
 	}
 
 
