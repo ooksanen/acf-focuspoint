@@ -25,5 +25,13 @@
             "type":"composer",
             "url":"https://wpackagist.org"
         }
-    ]
+    ],
+    "require": {
+        "composer/installers": "^2.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
 }
