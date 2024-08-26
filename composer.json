@@ -1,7 +1,7 @@
 {
     "name": "ooksanen/acf-focuspoint",
     "description": "Adds a image focus field",
-    "type": "wordpress-muplugin",
+    "type": "wordpress-plugin",
     "license": "MIT",
     "funding": [
         {
