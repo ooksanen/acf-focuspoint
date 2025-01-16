@@ -1,6 +1,6 @@
 ## NOTE
 
-This project isn't being developed at the moment. I recommend checking out https://github.com/hirasso/focal-point-picker for a more up-to-date version.
+This project isn't being developed at the moment. I recommend checking out https://github.com/hirasso/focal-point-picker for a more comprehensive and up-to-date version of image focal point selection.
 
 
 -----------------------
